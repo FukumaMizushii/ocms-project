@@ -35,7 +35,14 @@
     <div class="left">
       <h1>User Login</h1>
 
-      <!-- Display error messages -->
+      <!-- Display messages -->
+      <% if (session.getAttribute("success") != null) { %>
+          <div class="success-message" style="color: green; margin: 10px 0;">
+              <%= session.getAttribute("success") %>
+          </div>
+          <% session.removeAttribute("success"); %>
+      <% } %>
+      
       <% if (session.getAttribute("error") != null) { %>
           <div class="error-message" style="color: red; margin-bottom: 15px;">
               <%= session.getAttribute("error") %>

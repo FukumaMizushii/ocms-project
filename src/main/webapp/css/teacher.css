@@ -55,18 +55,22 @@ body {
 .nav-info span {
     font-size: 1.4rem;
     margin: 0.3rem 0.5rem 0 0.5rem;
+    padding: 0 5px 0 5px;
     color: beige;
+    background-color: limegreen;
+    border-radius: 7px;
 }
 
 .nav-info button {
     border: none;
     padding: 0.3rem 0.5rem;
-    margin: 0 0.5rem 0.5rem 0.5rem;
-    border-radius: 0.9rem;
+    margin: 0.4rem 0.5rem 0.2rem 0.5rem;
+    border-radius: 10px;
     font-weight: 600;
     color: black;
     background-color: #fc7878;
 }
+
 
 .nav-info button:hover {
     scale: 1.05;

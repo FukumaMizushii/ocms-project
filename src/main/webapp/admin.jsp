@@ -10,6 +10,10 @@
         response.sendRedirect("login.jsp");
         return;
     }
+    
+    // Fetch all courses for display
+    CourseDAO courseDAO = new CourseDAO();
+    List<Course> allCourses = courseDAO.getAllCourses();
 %>
 
 <!DOCTYPE html>
@@ -67,55 +71,96 @@
                 <% } %>
             </div>
 
-            <div class="form-container">
-                <h1>Add New Course</h1>
+            <div class="main-content">
+                <!-- Left Panel: Add Course Form -->
+                <div class="left-panel">
+                    <div class="form-container">
+                        <h1>Add New Course</h1>
 
-                <form action="courses" method="post">
-                    <input type="hidden" name="action" value="add">
-                    
-                    <div class="input-group">
-                        <label for="course-name">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 30px; height: auto;vertical-align: text-top;">
-                                <path d="M384 512L96 512c-53 0-96-43-96-96L0 96C0 43 43 0 96 0L400 0c26.5 0 48 21.5 48 48l0 288c0 20.9-13.4 38.7-32 45.3l0 66.7c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0zM96 384c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0 0-64-256 0zm32-232c0 13.3 10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0c-13.3 0-24 10.7-24 24zm24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0z" />
-                            </svg>
-                            Course Name
-                        </label>
-                        <input type="text" id="course-name" name="course-name" placeholder="Enter course name" required />
+                        <form action="courses" method="post">
+                            <input type="hidden" name="action" value="add">
+                            
+                            <div class="input-group">
+                                <label for="course-name">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 30px; height: auto;vertical-align: text-top;">
+                                        <path d="M384 512L96 512c-53 0-96-43-96-96L0 96C0 43 43 0 96 0L400 0c26.5 0 48 21.5 48 48l0 288c0 20.9-13.4 38.7-32 45.3l0 66.7c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0zM96 384c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0 0-64-256 0zm32-232c0 13.3 10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0c-13.3 0-24 10.7-24 24zm24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0z" />
+                                    </svg>
+                                    Course Name
+                                </label>
+                                <input type="text" id="course-name" name="course-name" placeholder="Enter course name" required />
+                            </div>
+
+                            <div class="input-group">
+                                <label for="course-code">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="width: 30px; height: auto;vertical-align: text-top;">
+                                        <path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z" />
+                                    </svg>
+                                    Course Code
+                                </label>
+                                <input type="text" id="course-code" name="course-code" placeholder="Enter course code" required />
+                            </div>
+
+                            <div class="input-group">
+                                <label for="teacher">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="width: 30px; height: auto;vertical-align: text-top;">
+                                        <path d="M320 16a104 104 0 1 1 0 208 104 104 0 1 1 0-208zM96 88a72 72 0 1 1 0 144 72 72 0 1 1 0-144zM0 416c0-70.7 57.3-128 128-128 12.8 0 25.2 1.9 36.9 5.4-32.9 36.8-52.9 85.4-52.9 138.6l0 16c0 11.4 2.4 22.2 6.7 32L32 480c-17.7 0-32-14.3-32-32l0-32zm521.3 64c4.3-9.8 6.7-20.6 6.7-32l0-16c0-53.2-20-101.8-52.9-138.6 11.7-3.5 24.1-5.4 36.9-5.4 70.7 0 128 57.3 128 128l0 32c0 17.7-14.3 32-32 32l-86.7 0zM472 160a72 72 0 1 1 144 0 72 72 0 1 1 -144 0zM160 432c0-88.4 71.6-160 160-160s160 71.6 160 160l0 16c0 17.7-14.3 32-32 32l-256 0c-17.7 0-32-14.3-32-32l0-16z" />
+                                    </svg>
+                                    Select Teacher
+                                </label>
+                                <select name="teacher" id="teacher" required>
+                                    <option value="" disabled selected>Select a teacher</option>
+                                    <%
+                                        UserDAO userDAO = new UserDAO();
+                                        List<User> teachers = userDAO.getTeachers();
+                                        for (User teacher : teachers) {
+                                    %>
+                                        <option value="<%= teacher.getId() %>"><%= teacher.getFullName() %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+
+                            <button id="submit-btn" type="submit">
+                                Add Course
+                            </button>
+                        </form>
                     </div>
+                </div>
 
-                    <div class="input-group">
-                        <label for="course-code">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="width: 30px; height: auto;vertical-align: text-top;">
-                                <path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z" />
-                            </svg>
-                            Course Code
-                        </label>
-                        <input type="text" id="course-code" name="course-code" placeholder="Enter course code" required />
+                <!-- Right Panel: All Courses List -->
+                <div class="right-panel">
+                    <h2 class="courses-title">All Available Courses</h2>
+                    <div class="courses-list">
+                        <ul>
+                            <% if (allCourses.isEmpty()) { %>
+                                <li class="empty-message">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="vertical-align: text-top; width: 1.8rem;">
+                                            <path d="M384 512L96 512c-53 0-96-43-96-96L0 96C0 43 43 0 96 0L400 0c26.5 0 48 21.5 48 48l0 288c0 20.9-13.4 38.7-32 45.3l0 66.7c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0zM96 384c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0 0-64-256 0zm32-232c0 13.3 10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0c-13.3 0-24 10.7-24 24zm24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0z" />
+                                        </svg>
+                                    </span>
+                                    <div class="course-info">
+                                        <p>No courses available yet</p>
+                                        <p>Add a course using the form on the left</p>
+                                    </div>
+                                </li>
+                            <% } else {
+                                for (Course course : allCourses) { %>
+                                <li>
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="vertical-align: text-top; width: 1.8rem;">
+                                            <path d="M384 512L96 512c-53 0-96-43-96-96L0 96C0 43 43 0 96 0L400 0c26.5 0 48 21.5 48 48l0 288c0 20.9-13.4 38.7-32 45.3l0 66.7c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0zM96 384c-17.7 0-32 14.3-32 32s14.3 32 32 32l256 0 0-64-256 0zm32-232c0 13.3 10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0c-13.3 0-24 10.7-24 24zm24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-176 0z" />
+                                        </svg>
+                                    </span>
+                                    <div class="course-info">
+                                        <p><%= course.getCourseName() %> (<%= course.getCourseCode() %>)</p>
+                                        <p>Teacher: <%= course.getTeacherName() %></p>
+                                    </div>
+                                </li>
+                            <% } 
+                            } %>
+                        </ul>
                     </div>
-
-                    <div class="input-group">
-                        <label for="teacher">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="width: 30px; height: auto;vertical-align: text-top;">
-                                <path d="M320 16a104 104 0 1 1 0 208 104 104 0 1 1 0-208zM96 88a72 72 0 1 1 0 144 72 72 0 1 1 0-144zM0 416c0-70.7 57.3-128 128-128 12.8 0 25.2 1.9 36.9 5.4-32.9 36.8-52.9 85.4-52.9 138.6l0 16c0 11.4 2.4 22.2 6.7 32L32 480c-17.7 0-32-14.3-32-32l0-32zm521.3 64c4.3-9.8 6.7-20.6 6.7-32l0-16c0-53.2-20-101.8-52.9-138.6 11.7-3.5 24.1-5.4 36.9-5.4 70.7 0 128 57.3 128 128l0 32c0 17.7-14.3 32-32 32l-86.7 0zM472 160a72 72 0 1 1 144 0 72 72 0 1 1 -144 0zM160 432c0-88.4 71.6-160 160-160s160 71.6 160 160l0 16c0 17.7-14.3 32-32 32l-256 0c-17.7 0-32-14.3-32-32l0-16z" />
-                            </svg>
-                            Select Teacher
-                        </label>
-                        <select name="teacher" id="teacher" required>
-                            <option value="" disabled selected>Select a teacher</option>
-                            <%
-                                UserDAO userDAO = new UserDAO();
-                                List<User> teachers = userDAO.getTeachers();
-                                for (User teacher : teachers) {
-                            %>
-                                <option value="<%= teacher.getId() %>"><%= teacher.getFullName() %></option>
-                            <% } %>
-                        </select>
-                    </div>
-
-                    <button id="submit-btn" type="submit">
-                        Add Course
-                    </button>
-                </form>
+                </div>
             </div>
         </main>
 

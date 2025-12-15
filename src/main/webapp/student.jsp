@@ -143,8 +143,8 @@
                             </svg>
                         </span>
                         <div class="course-info">
-                            <p><%= course.getCourseName() %> (<%= course.getCourseCode() %>)</p>
-                            <p>Teacher: <%= course.getTeacherName() %></p>
+                            <p style="color: midnightblue;font-size: 1.4rem;"><%= course.getCourseName() %> (<%= course.getCourseCode() %>)</p>
+                            <p style="color: #191429;">Teacher: <%= course.getTeacherName() %></p>
                         </div>
                         <% if (isEnrolled) { %>
                             <span id="book-btn" style="background-color: #6c757d; cursor: not-allowed;">
@@ -183,8 +183,8 @@
                             </svg>
                         </span>
                         <div class="course-info">
-                            <p><%= course.getCourseName() %> (<%= course.getCourseCode() %>)</p>
-                            <p>Teacher: <%= course.getTeacherName() %></p>
+                            <p style="color: midnightblue;font-size: 1.4rem;"><%= course.getCourseName() %> (<%= course.getCourseCode() %>)</p>
+                            <p style="color: #191429;">Teacher: <%= course.getTeacherName() %></p>
                         </div>
                         <span id="book-btn" style="background-color: #28a745;">
                             Enrolled
